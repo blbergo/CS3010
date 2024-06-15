@@ -1,1 +1,1 @@
-g++ main.cpp -o ./output/program && ./output/program
+g++ -I ./src/ ./src/*.cpp -o ./output/program && ./output/program
