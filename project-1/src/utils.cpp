@@ -11,7 +11,16 @@ void printVector(vector<int> vec)
     cout << endl;
 }
 
-void printMatrix(vector<vector<int>> matrix)
+void printVector(vector<float> vec)
+{
+    for (int i = 0; i < vec.size(); i++)
+    {
+        cout << vec[i] << " ";
+    }
+    cout << endl;
+}
+
+void printMatrix(matrix matrix)
 {
     for (int i = 0; i < matrix.size(); i++)
     {
@@ -23,7 +32,7 @@ void printMatrix(vector<vector<int>> matrix)
     }
 }
 
-vector<int> getMaxAbsValues(vector<vector<int>> matrix)
+vector<int> getMaxAbsValues(matrix matrix)
 {
     vector<int> maxValues;
 
@@ -44,4 +53,33 @@ vector<int> getMaxAbsValues(vector<vector<int>> matrix)
     }
 
     return maxValues;
+}
+
+vector<float> getRowRatios(matrix matrix, vector<int> maxValues, int colIdx)
+{
+    vector<float> ratios;
+
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        ratios.push_back((float)abs(matrix[i][colIdx]) / (float)maxValues[i]);
+    }
+
+    return ratios;
+}
+
+int getTargetK(vector<float> ratios)
+{
+    int targetK = 0;
+    int maxRatio = ratios[0];
+
+    for (int i = 0; i < ratios.size(); i++)
+    {
+        if (ratios[i] > maxRatio)
+        {
+            maxRatio = ratios[i];
+            targetK = i;
+        }
+    }
+
+    return targetK;
 }

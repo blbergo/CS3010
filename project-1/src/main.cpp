@@ -1,9 +1,9 @@
 #include <main.h>
 #include <utils.h>
 
-int main()
+int main(int argc, char const *argv[])
 {
-    vector<vector<int>> matrix = {
+    matrix matrix = {
         {3, -13, 9, 3},
         {-6, 4, 1, 18},
         {6, -2, 2, 4},
@@ -11,5 +11,7 @@ int main()
     vector<int> bValues = {-19, -34, 16, 26};
 
     vector<int> maxValues = getMaxAbsValues(matrix);
-    printVector(maxValues);
+
+
+    return 0;
 }
