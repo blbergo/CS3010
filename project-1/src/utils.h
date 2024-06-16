@@ -1,7 +1,22 @@
 #include <vector>
+#include <iomanip>
+#include <limits>
+#include <algorithm>
+
 using namespace std;
 
-typedef vector<vector<int>> matrix;
+struct matrix
+{
+    vector<vector<double>> matrix;
+    vector<double> bValues;
+};
+
+/**
+ * @brief Function to print a vector of integers
+ *
+ * @param[in] vec Vector of integers.
+ */
+void printVector(vector<double> vec);
 
 /**
  * @brief Function to print a vector of integers
@@ -9,7 +24,6 @@ typedef vector<vector<int>> matrix;
  * @param[in] vec Vector of integers.
  */
 void printVector(vector<int> vec);
-void printVector(vector<float> vec);
 
 /**
  * @brief Function to print a matrix of integers
@@ -22,24 +36,39 @@ void printMatrix(matrix matrix);
  * @brief Function to find the maximum value in each row of a matrix
  *
  * @param[in] matrix 2D vector of integers.
- * @return vector<int>
+ * @return vector<double>
  */
-vector<int> getMaxAbsValues(matrix matrix);
+vector<double> getMaxAbsValues(matrix matrix);
 
 /**
- * @brief Function to get the ratios of the rows of a matrix
+ * @brief Function to calculate the ratios of a row
  *
- * @param[in] row Vector of integers.
- * @param[in] maxValues Vector of integers.
+ * @param[in] matrix 2D vector of integers.
+ * @param[in] s Vector of doubles.
+ * @param[in] l Vector of integers.
  * @param[in] colIdx Integer.
- * @return vector<float>
+ * @return vector<double>
  */
-vector<float> getRowRatios(matrix matrix, vector<int> maxValues, int colIdx);
+vector<double> calculateRatios(matrix matrix, vector<double> s, vector<int> l, int colIdx);
 
 /**
  * @brief Function to get the target K value for a row
  *
- * @param[in] ratios Vector of floats.
+ * @param[in] ratios Vector of doubles.
  * @return int
  */
-int getTargetK(vector<float> ratios);
+int getTargetK(vector<double> ratios, int colIdx);
+
+/**
+ * @brief Function to swap values in a vector
+ *
+ * @param[in] l Vector of integers.
+ * @param[in] k Integer.
+ * @param[in] colIdx Integer.
+ * @return vector<int>
+ */
+vector<int> swapValues(vector<int> l, int k, int colIdx);
+
+matrix eliminateRows(matrix matrix, vector<int> l, int colIdx, int pivotIdx, vector<int> pivotedRows);
+
+vector<double> backSubstitution(matrix matrix, vector<int> l);
