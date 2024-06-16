@@ -72,7 +72,6 @@ vector<double> calculateRatios(matrix matrix, vector<double> s, vector<int> l, i
 
     for (int i = 0; i < l.size(); i++)
     {
-        cout << "Top: " << abs(matrix.matrix[l[i]][colIdx]) << " Bottom: " << s[l[i]] << " Result: " << abs(matrix.matrix[l[i]][colIdx] / s[l[i]]) << endl;
         ratios.push_back(abs(matrix.matrix[l[i]][colIdx] / s[l[i]]));
     }
 
@@ -112,10 +111,7 @@ matrix eliminateRows(matrix matrix, vector<int> l, int colIdx, int pivotIdx, vec
         if (l[i] != pivotIdx && find(pivotedRows.begin(), pivotedRows.end(), i) == pivotedRows.end())
         {
             double factor = matrix.matrix[l[i]][colIdx] / matrix.matrix[pivotIdx][colIdx];
-            cout << "Top: " << matrix.matrix[l[i]][colIdx] << " Bottom: " << matrix.matrix[pivotIdx][colIdx] << " Factor: " << factor << endl;
-            cout << "l[i]: " << l[i] << " colIdx: " << colIdx << " pivotIdx: " << pivotIdx << endl;
-            printVector(matrix.matrix[l[i]]);
-
+        
             for (int j = colIdx; j < matrix.matrix[i].size(); j++)
             {
                 double result = matrix.matrix[l[i]][j] - (factor * matrix.matrix[pivotIdx][j]);
@@ -156,4 +152,50 @@ vector<double> backSubstitution(matrix matrix, vector<int> l)
     }
 
     return solutions;
+}
+
+void scaledPartialPivoting(matrix matrix)
+{
+    vector<double>
+        s = getMaxAbsValues(matrix);
+    vector<int> l = {};
+
+    for (int i = 0; i < matrix.matrix.size(); i++)
+    {
+        l.push_back(i);
+    }
+
+    vector<int> pivotedRows;
+    vector<int> order;
+
+    for (int i = 0; i < l.size(); i++)
+    {
+        cout << "Matrix at iteration " << i << ":" << endl;
+        printMatrix(matrix);
+
+        vector<double> ratios = calculateRatios(matrix, s, l, i);
+
+        int k = getTargetK(ratios, i);
+        cout << "Ratios: ";
+        printVector(ratios);
+
+        // output is plus 1 for non-zero indexing
+        cout << "Pivot row: " << k + 1 << endl;
+
+        matrix = eliminateRows(matrix, l, i, l[k], pivotedRows);
+        order.push_back(l[k]);
+        l = swapValues(l, k, i);
+        pivotedRows.push_back(l[k]);
+    };
+
+    cout << "Final Matrix:" << endl;
+    printMatrix(matrix);
+
+    cout << "B values:" << endl;
+    printVector(matrix.bValues);
+    cout << endl;
+
+    reverse(order.begin(), order.end());
+
+    backSubstitution(matrix, order);
 }

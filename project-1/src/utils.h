@@ -69,6 +69,28 @@ int getTargetK(vector<double> ratios, int colIdx);
  */
 vector<int> swapValues(vector<int> l, int k, int colIdx);
 
+/**
+ * @brief Function to swap values in a matrix
+ *
+ * @param[in] matrix 2D vector of integers.
+ * @param[in] k Integer.
+ * @param[in] colIdx Integer.
+ * @return matrix
+ */
 matrix eliminateRows(matrix matrix, vector<int> l, int colIdx, int pivotIdx, vector<int> pivotedRows);
 
+/**
+ * @brief Function to perform back substitution
+ *
+ * @param[in] matrix 2D vector of integers.
+ * @param[in] l Vector of integers.
+ * @return vector<double>
+ */
 vector<double> backSubstitution(matrix matrix, vector<int> l);
+
+/**
+ * @brief Function to perform scaled partial pivoting
+ *
+ * @param[in] matrix 2D vector of integers.
+ */
+void scaledPartialPivoting(matrix matrix);
