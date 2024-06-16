@@ -32,6 +32,10 @@ void printMatrix(matrix matrix)
         cout << endl;
     }
     cout << endl;
+
+    cout << "B values:" << endl;
+    printVector(matrix.bValues);
+    cout << endl;
 }
 
 vector<double> getMaxAbsValues(matrix matrix)
