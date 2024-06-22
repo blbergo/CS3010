@@ -26,11 +26,14 @@ int main(int argc, char const *argv[])
     vector<double> solutions = stringToVector(STARTING_SOLUTIONS);
     double desiredError = stod(DESIRED_ERROR);
 
+    cout << "Jacobi Method:" << endl;
     vector<double> jacobi = jacobiMethod(coeffecients, solutions, desiredError);
     cout << "Jacobi solutions: ";
     printVector(jacobi);
-    cout << endl;
+    cout << endl
+         << endl;
 
+    cout << "Gauss-Seidel Method:" << endl;
     vector<double> gaussSeidel = gaussSeidelMethod(coeffecients, solutions, desiredError);
     cout << "Gauss-Seidel solutions: ";
     printVector(gaussSeidel);

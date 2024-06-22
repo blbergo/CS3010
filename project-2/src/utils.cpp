@@ -5,6 +5,7 @@
 using namespace std;
 
 int MAX_ITERATIONS = 50;
+double EPSILON = numeric_limits<float>::epsilon();
 
 void printVector(vector<double> vec)
 {
@@ -114,18 +115,15 @@ vector<double> jacobiMethod(matrix mat, vector<double> startingSolutions, double
 
         for (int i = 0; i < currentSolutions.size(); i++)
         {
-            if (fabs(currentSolutions[i] - previousSolutions[i]) != 0)
+            if (fabs(currentSolutions[i] - previousSolutions[i]) > EPSILON)
             {
-                cout << fabs(currentSolutions[i] - previousSolutions[i]) << endl;
-                cout << numeric_limits<double>::epsilon()
-                     << endl;
                 oscillating = false;
             }
         }
 
         if (oscillating)
         {
-            cout << "The method is oscillating." << endl;
+            cout << "The method is oscillating based on C++ Float precision." << endl;
             return currentSolutions;
         }
 
@@ -145,8 +143,11 @@ vector<double> jacobiMethod(matrix mat, vector<double> startingSolutions, double
 
     if (error > desiredError)
     {
-        cout << "The method did not reach the desird error after " << MAX_ITERATIONS << " iterations." << endl;
+        cout << "The method did not reach the desired error after " << MAX_ITERATIONS << " iterations." << endl;
     }
+
+    cout << EPSILON << endl
+         << endl;
 
     return currentSolutions;
 }
@@ -187,7 +188,7 @@ vector<double> gaussSeidelMethod(matrix mat, vector<double> startingSolutions, d
 
         for (int i = 0; i < currentSolutions.size(); i++)
         {
-            if (fabs(currentSolutions[i] - previousSolutions[i]) != 0)
+            if (fabs(currentSolutions[i] - previousSolutions[i]) > EPSILON)
             {
                 oscillating = false;
             }
@@ -195,7 +196,8 @@ vector<double> gaussSeidelMethod(matrix mat, vector<double> startingSolutions, d
 
         if (oscillating)
         {
-            cout << "The method is oscillating." << endl;
+            cout << "The method is oscillating according to C++ Float precision." << endl
+                 << endl;
             return currentSolutions;
         }
 
