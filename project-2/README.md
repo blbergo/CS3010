@@ -1,4 +1,4 @@
-# CS3010 Project 1 - Gaussian Elimination with Scale Partial Pivoting
+# CS3010 Project 2 - Jacobi and Gauss-Seidel Methofs
 Developed By: Bryan Bergo
 Section E01
 
@@ -15,3 +15,7 @@ If you can't grant execute access to the `run` script, or wish to compile on you
 g++ -I ./src/ ./src/*.cpp -o ./output/program && ./output/program
 ```
 Compiler information can be found under `/.vscode/c_cpp_properties.json`
+
+## Precision
+For decimal values, I am using  C++ `doubles`. To determine oscillation I am using C++ `numeric_limits<float>::epsilon()` casted as a `double`, 
+which I found to be most accurate in determining convergence in only 50 iterations while accounting for oscillation.
