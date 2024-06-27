@@ -3,7 +3,7 @@
 
 int main(int argc, char const *argv[])
 {
-    double EPSILON = 0.001;
+    double DELTA = 0.01;
 
     vector<double> f = {2,
                         -11.7,
@@ -61,6 +61,18 @@ int main(int argc, char const *argv[])
 
     double falsePositionPartB = falsePositionMethod(120, 130, f, evaluateSpecialFunction, "false-position-b.csv");
     printMethodResult("False Position Root (b):", falsePositionPartB);
+
+    double modifiedSecantPartA1 = modifiedSecantMethod(0, DELTA, f, evaluateFunction, "modified-secant-a-1.csv");
+    printMethodResult("Modified Secant Root 1 (a):", modifiedSecantPartA1);
+
+    double modifiedSecantPartA2 = modifiedSecantMethod(modifiedSecantPartA1 + 1, DELTA, f, evaluateFunction, "modified-secant-a-2.csv");
+    printMethodResult("Modified Secant Root 2 (a):", modifiedSecantPartA2);
+
+    double modifiedSecantPartA3 = modifiedSecantMethod(modifiedSecantPartA2 + 1, DELTA, f, evaluateFunction, "modified-secant-a-3.csv");
+    printMethodResult("Modified Secant Root 3 (a):", modifiedSecantPartA3);
+
+    double modifiedSecantPartB = modifiedSecantMethod(120, DELTA, f, evaluateSpecialFunction, "modified-secant-b.csv");
+    printMethodResult("Modified Secant Root (b):", modifiedSecantPartB);
 
     return 0;
 }

@@ -253,3 +253,39 @@ double falsePositionMethod(double a, double b, vector<double> f, function<double
 
     return c;
 }
+
+double modifiedSecantMethod(double x0, double delta, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename)
+{
+    cout << "Modified Secant Method" << endl;
+    double x1 = 0;
+    double fx0 = evalFunction(f, x0);
+    double fx1 = 0;
+    double error = 0;
+
+    matrix rows;
+
+    printTableHeaders({"n", "x0", "f(x0)", "f(x0 + delta)", "x1", "Error"});
+
+    for (int i = 0; i < MAX_ITERATIONS; i++)
+    {
+        double fx0Delta = evalFunction(f, x0 + delta);
+        x1 = x0 - fx0 * delta / (fx0Delta - fx0);
+        fx1 = evalFunction(f, x1);
+        error = calculateRelativeError(x0, x1);
+
+        printTableRow({to_string(i), to_string(x0), to_string(fx0), to_string(fx0Delta), to_string(x1), to_string(error)});
+        rows.matrix.push_back({(double)i, x0, fx0, fx0Delta, x1, error});
+
+        if (error < EPSILON)
+        {
+            break;
+        }
+
+        x0 = x1;
+        fx0 = fx1;
+    }
+
+    writeMatrixToCSV(rows.matrix, "./output/data/" + outputFilename);
+
+    return x1;
+}

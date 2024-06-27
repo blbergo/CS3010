@@ -121,3 +121,15 @@ double secantMethod(double x0, double x1, vector<double> f, function<double(vect
  * @return double The root of the function.
  */
 double falsePositionMethod(double a, double b, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);
+
+/**
+ * @brief Function to find the root of a function using the modified secant method
+ *
+ * @param[in] x0 The initial guess.
+ * @param[in] delta The step size.
+ * @param[in] f Vector of coefficients of the function.
+ * @param[in] evalFunction Function to evaluate the function.
+ * @param[in] outputFilename The name of the file to write the output to.
+ * @return double The root of the function.
+ */
+double modifiedSecantMethod(double x0, double delta, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);
