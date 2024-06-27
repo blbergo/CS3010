@@ -77,3 +77,15 @@ double evaluateSpecialFunction(vector<double> f, double x);
  * @return double The root of the function.
  */
 double bisectionMethod(double a, double b, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);
+
+/**
+ * @brief Function to find the root of a function using the Newton-Raphson method
+ *
+ * @param[in] x0 The initial guess.
+ * @param[in] f Vector of coefficients of the function.
+ * @param[in] evalFunction Function to evaluate the function.
+ * @param[in] evalDerivative Function to evaluate the derivative of the function.
+ * @param[in] outputFilename The name of the file to write the output to.
+ * @return double The root of the function.
+ */
+double newtonRaphsonMethod(double x0, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);
