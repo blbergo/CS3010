@@ -40,6 +40,14 @@ void printTableHeaders(vector<string> headers);
 void printTableRow(vector<string> row);
 
 /**
+ * @brief Function to print the result of a method
+ *
+ * @param[in] method The name of the method.
+ * @param[in] result The result of the method.
+ */
+void printMethodResult(string method, double result);
+
+/**
  * @brief Function to calculate the error between the previous and current values
  *
  * @param[in] previous The previous value.
@@ -101,3 +109,15 @@ double newtonRaphsonMethod(double x0, vector<double> f, function<double(vector<d
  * @return double The root of the function.
  */
 double secantMethod(double x0, double x1, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);
+
+/**
+ * @brief Function to find the root of a function using the false position method
+ *
+ * @param[in] a The lower bound of the interval.
+ * @param[in] b The upper bound of the interval.
+ * @param[in] f Vector of coefficients of the function.
+ * @param[in] evalFunction Function to evaluate the function.
+ * @param[in] outputFilename The name of the file to write the output to.
+ * @return double The root of the function.
+ */
+double falsePositionMethod(double a, double b, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);
