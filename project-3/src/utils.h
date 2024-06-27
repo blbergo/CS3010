@@ -89,3 +89,15 @@ double bisectionMethod(double a, double b, vector<double> f, function<double(vec
  * @return double The root of the function.
  */
 double newtonRaphsonMethod(double x0, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);
+
+/**
+ * @brief Function to find the root of a function using the secant method
+ *
+ * @param[in] x0 The first initial guess.
+ * @param[in] x1 The second initial guess.
+ * @param[in] f Vector of coefficients of the function.
+ * @param[in] evalFunction Function to evaluate the function.
+ * @param[in] outputFilename The name of the file to write the output to.
+ * @return double The root of the function.
+ */
+double secantMethod(double x0, double x1, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename);

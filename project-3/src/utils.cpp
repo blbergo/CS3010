@@ -119,7 +119,7 @@ double bisectionMethod(double a, double b, vector<double> f, function<double(vec
         }
     }
 
-    writeMatrixToCSV(rows.matrix, "./output/" + outputFilename);
+    writeMatrixToCSV(rows.matrix, "./output/data/" + outputFilename);
 
     return c;
 }
@@ -155,7 +155,45 @@ double newtonRaphsonMethod(double x0, vector<double> f, function<double(vector<d
         fx0 = fx1;
     }
 
-    writeMatrixToCSV(rows.matrix, "./output/" + outputFilename);
+    writeMatrixToCSV(rows.matrix, "./output/data/" + outputFilename);
 
     return x1;
+}
+
+double secantMethod(double x0, double x1, vector<double> f, function<double(vector<double>, double)> evalFunction, string outputFilename)
+{
+    cout << "Secant Method" << endl;
+    double x2 = 0;
+    double fx0 = evalFunction(f, x0);
+    double fx1 = evalFunction(f, x1);
+    double fx2 = 0;
+    double error = 0;
+
+    matrix rows;
+
+    printTableHeaders({"n", "x0", "x1", "f(x0)", "f(x1)", "x2", "f(x2)", "Error"});
+
+    for (int i = 0; i < MAX_ITERATIONS; i++)
+    {
+        x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0);
+        fx2 = evalFunction(f, x2);
+        error = calculateRelativeError(x1, x2);
+
+        printTableRow({to_string(i), to_string(x0), to_string(x1), to_string(fx0), to_string(fx1), to_string(x2), to_string(fx2), to_string(error)});
+        rows.matrix.push_back({(double)i, x0, x1, fx0, fx1, x2, fx2, error});
+
+        if (error < EPSILON)
+        {
+            break;
+        }
+
+        x0 = x1;
+        fx0 = fx1;
+        x1 = x2;
+        fx1 = fx2;
+    }
+
+    writeMatrixToCSV(rows.matrix, "./output/data/" + outputFilename);
+
+    return x2;
 }
