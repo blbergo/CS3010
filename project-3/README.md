@@ -1,4 +1,4 @@
-# CS3010 Project 2 - Jacobi and Gauss-Seidel Methofs
+# CS3010 Project 2 - Bisection, NR, Secant, FP, Modified Secant Methods
 Developed By: Bryan Bergo
 Section E01
 
